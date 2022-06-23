@@ -12,30 +12,19 @@
                 required: true,
                 autofocus: true
                 %>
-    <%= f.simple_fields_for :addresses do |address| %>
-    <%= address.input :street_number, 
-                required: true,
-                autofocus: true
-                %> 
-    <%= address.input :street_name,
-                required: true,
-                autofocus: true
-                %>  
+<%= f.simple_fields_for :address, Address.new do |a| %>
 
-    <%= address.input :suburb,
-                required: true,
-                autofocus: true
-                %>   
-    <%= address.input :postcode,
-                required: true,
-                autofocus: true
-                %>  
-    <%= address.input :state,
-                required: true,
-                autofocus: true
-                %>     
+    <%= a.input :street_number, required: true, autofocus: true%> 
 
-                <% end %>
+    <%= a.input :street_name, required: true, autofocus: true %>  
+
+    <%= a.input :suburb, required: true, autofocus: true %>   
+
+    <%= a.input :postcode, required: true, autofocus: true %> 
+     
+    <%= a.input :state, required: true, autofocus: true %> 
+
+<% end %>
                 
     <%= f.input :password,
                 required: true,
