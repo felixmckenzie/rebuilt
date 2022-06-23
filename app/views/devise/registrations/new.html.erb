@@ -14,15 +14,30 @@
                 %>
 <%= f.simple_fields_for :address, Address.new do |a| %>
 
-    <%= a.input :street_number, required: true, autofocus: true%> 
+    <%= a.input :street_number, 
+                required: true, 
+                autofocus: true
+    %> 
 
-    <%= a.input :street_name, required: true, autofocus: true %>  
+    <%= a.input :street_name, 
+                required: true, 
+                autofocus: true 
+    %>  
 
-    <%= a.input :suburb, required: true, autofocus: true %>   
+    <%= a.input :suburb, 
+                required: true, 
+               autofocus: true 
+    %>   
 
-    <%= a.input :postcode, required: true, autofocus: true %> 
+    <%= a.input :postcode, 
+              required: true, 
+              autofocus: true 
+    %> 
      
-    <%= a.input :state, required: true, autofocus: true %> 
+    <%= a.input :state, 
+               required: true, 
+               autofocus: true 
+    %> 
 
 <% end %>
                 
