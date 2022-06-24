@@ -10,7 +10,7 @@
     <%= f.input :price %>
     <%= f.input :sold %>
     <%= f.association :user %>
-    <%= f.association :category %>
+    <%= f.association :category, collection: @categories %>
   </div>
 
   <div class="form-actions">
