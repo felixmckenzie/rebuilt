@@ -8,8 +8,6 @@
     <%= f.input :description, as: :rich_text_area %>
     <%= f.input :condition %>
     <%= f.input :price %>
-    <%= f.input :sold %>
-    <%= f.association :user %>
     <%= f.association :category, collection: @categories %>
   </div>
 
