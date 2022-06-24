@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address
 
-# Runs validation for associated address and additional username field 
+# Validations for additional username field and associated address model 
   validates_associated :address
   validates :address, presence: true 
   validates_presence_of :username
