@@ -9,6 +9,7 @@
     <%= f.input :condition %>
     <%= f.input :price %>
     <%= f.association :category, collection: @categories %>
+    <%= f.input :picture, as: :file, accept: "image/png, image/jpeg, image/jpg" %>
   </div>
 
   <div class="form-actions">
