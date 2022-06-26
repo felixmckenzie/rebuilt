@@ -13,5 +13,5 @@ class Listing < ApplicationRecord
     fair: 1,
     brand_new: 2
   }
-  
+
 end
