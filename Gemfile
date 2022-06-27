@@ -55,3 +55,4 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
 gem 'enum_help'
+gem "stripe", "~> 6.4"
