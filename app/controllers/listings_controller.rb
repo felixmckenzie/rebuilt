@@ -1,8 +1,8 @@
 class ListingsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :set_form_vars, only: [:new, :edit]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index]
 
   # GET /listings or /listings.json
   def index
@@ -95,12 +95,7 @@ class ListingsController < ApplicationController
       @categories = Category.all
     end 
 
-    def authorize_user
-      if listing.user_id != current_user.flash[:alert] = "You can't do that"
-        redirect_to listings_path
-      end
-    end
-
+  
     def strip_html_tags(string)
       ActionController::Base.helpers.strip_tags(string)
   end

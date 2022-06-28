@@ -14,17 +14,23 @@
 <p class="blockquote mt-2">Price: $<%= @listing.price %></p>
 <p class="blockquote mt-2">Category: <%= @listing.category.name %></p>
 <p class="blockquote mt-2"> Listed By: <%= @listing.user.username %> </p>
-<% if user_signed_in? %>
-<p class="blockquote mt-2"><button data-stripe="payment" class="btn btn-info">Buy Now!</button></p>
+<% if can? :manage, @listing %>  
+  <%=link_to "Edit", edit_listing_path(@listing.id), class: "btn btn-warning p-3 m-1"%>
+  <%=link_to "Delete", @listing, method: :delete, data: {confirm: "Are you sure you want to delete this listing?"} , class: "btn btn-danger p-3 m-1 text-white" %>
+  <% end %>
+  
+<% if can? :read, @listing %>
+  <% if @listing.sold == false %>
+    <p class="blockquote mt-2"><button data-stripe="payment" class="btn btn-info">Buy Now!</button></p>
+  <% else %>
+    <button type="button" class="btn btn-secondary" disabled>Listing Sold</button>
+  <% end %>
 <% end %>
 
+<p class="blockquote mt-2"><%= link_to 'All Listings', listings_path, class: "btn btn-info"  %></p>
 
-
-<% if current_user.id == @listing.user_id %>
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<% end %>
-<%= link_to 'Back', listings_path %>
 </div>
+
 </section>
 
 <script src="https://js.stripe.com/v3/"></script>
