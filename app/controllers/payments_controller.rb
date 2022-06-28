@@ -1,5 +1,8 @@
 class PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:webhook, :success]
+
   def success
+    @listing = Listing.includes(user:[:address]).find(params[:id])
   end
 
 
@@ -13,4 +16,6 @@ class PaymentsController < ApplicationController
     @order = Order.create(listing_id: listing_id, buyer_id: buyer_id, seller_id: listing.user_id)
 end
 
+
 end
+  
