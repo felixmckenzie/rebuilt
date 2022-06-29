@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
   load_and_authorize_resource
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :set_form_vars, only: [:new, :edit]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except:[:index]
 
   # GET /listings or /listings.json
   def index
