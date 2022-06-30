@@ -4,6 +4,8 @@ class Listing < ApplicationRecord
   has_rich_text :description
   has_one_attached :picture
   has_one :order, dependent: :destroy 
+  has_many :watches 
+  has_many :watchers, through: :watches 
 
   # validations for listing form fields 
   validates :title, :condition, :price, :description, presence: true
