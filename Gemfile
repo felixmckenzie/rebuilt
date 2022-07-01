@@ -54,7 +54,7 @@ gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
-gem 'enum_help'
 gem "stripe", "~> 6.4"
 gem 'cancancan'
 gem 'ransack' 
+gem 'enum_help'

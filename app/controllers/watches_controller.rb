@@ -1,8 +1,8 @@
 class WatchesController < ApplicationController
   
   def index
-    @user = current_user
-    @watchlist = Watch.where(watcher_id: @user.id)
+    # @user = current_user
+    # @all_watched_listings_for_user = Watch.where(watcher_id: @user.id)
   end 
   
   def create

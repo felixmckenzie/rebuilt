@@ -14,8 +14,6 @@
     <% end %>
 </div>
 
-
-
   <div class="row row-cols-1 row-cols-md-4 g-4 mx-5">
   <% @listings.each do |listing|%>
       <div class="col mb-4">
@@ -25,8 +23,10 @@
         <% end %>
         <div class="card-body">
          <h4 class="card-title"><%= listing.title %></h4>
-         <h5 class="card-text">$<%= listing.price %></h5>
-        <%= link_to "See more", listing_path(listing.id), class: "btn btn-info text-white" %>
+         <span class="badge badge-pill badge-secondary">Category: <%= listing.category.name %></span>
+         <span class="badge badge-pill badge-secondary">Condition: <%= listing.condition.titleize %></span>
+          <p class="blockquote mt-2">$<%= listing.price %></p>
+        <p class="blockquote mt-2"><%= link_to "See more", listing_path(listing.id), class: "btn btn-info text-white" %></p>
         </div>
       </div>
     </div>

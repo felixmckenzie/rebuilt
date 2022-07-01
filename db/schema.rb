@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_30_014020) do
+ActiveRecord::Schema.define(version: 2022_07_01_023238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,12 +110,12 @@ ActiveRecord::Schema.define(version: 2022_06_30_014020) do
   end
 
   create_table "watches", force: :cascade do |t|
-    t.bigint "watched_listing_id", null: false
-    t.bigint "watcher_id", null: false
+    t.bigint "listing_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["watched_listing_id"], name: "index_watches_on_watched_listing_id"
-    t.index ["watcher_id"], name: "index_watches_on_watcher_id"
+    t.index ["listing_id"], name: "index_watches_on_listing_id"
+    t.index ["user_id"], name: "index_watches_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -126,6 +126,6 @@ ActiveRecord::Schema.define(version: 2022_06_30_014020) do
   add_foreign_key "orders", "listings"
   add_foreign_key "orders", "users", column: "buyer_id"
   add_foreign_key "orders", "users", column: "seller_id"
-  add_foreign_key "watches", "listings", column: "watched_listing_id"
-  add_foreign_key "watches", "users", column: "watcher_id"
+  add_foreign_key "watches", "listings"
+  add_foreign_key "watches", "users"
 end
