@@ -1,5 +1,6 @@
 class WatchesController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def index
     # @user = current_user
     # @all_watched_listings_for_user = Watch.where(watcher_id: @user.id)
@@ -17,12 +18,15 @@ class WatchesController < ApplicationController
 
 
   def destroy
+    Watch.destroy_by(listing_id: params[:id])
+    flash[:alert] = "listing removed from watchlist"
+    redirect_to watchlist_path
   end
 
 private 
 
 def watches_params
-  params.permit(:watched_listing_id, :watcher_id) 
+  params.permit(:listing_id, :user_id) 
 end 
 
 end

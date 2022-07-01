@@ -18,7 +18,7 @@
 <% if can? :read, @listing %>
     <% if cannot? :manage, @listing %>
         <% if @listing.sold == false %>
-          <%= button_to "Add to Watchlist", create_watched_listing_path(watched_listing_id: @listing.id, watcher_id: current_user.id ) %>
+          <%= button_to "Add to Watchlist", create_watched_listing_path(listing_id: @listing.id, user_id: current_user.id ) %>
           <p class="blockquote mt-2"><button data-stripe="payment" class="btn btn-info">Buy Now!</button></p>
 <% else %>
     <button type="button" class="btn btn-secondary" disabled>Listing Sold</button>

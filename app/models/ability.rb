@@ -8,6 +8,7 @@ class Ability
       can :read, :all
       return unless user.present?
       can :manage, Listing, user: user
+      can :manage, Watch, user: user 
       
     # The first argument to `can` is the action you are giving the user
     # permission to do.

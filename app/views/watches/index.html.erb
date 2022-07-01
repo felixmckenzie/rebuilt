@@ -14,7 +14,8 @@
          <span class="badge badge-pill badge-secondary">Category: <%= listing.category.name %></span>
          <span class="badge badge-pill badge-secondary">Condition: <%= listing.condition.titleize %></span>
          <span class="badge badge-pill badge-warning"><%= listing.watchers.count - 1 %> others watching this post </span>
-          <p class="blockquote mt-2">$<%= listing.price %></p>
+        <%= link_to "Remove From Watchlist", destroy_watch_path(listing.id), method: :delete, class: "badge badge-danger text-white" %></span>
+         <p class="blockquote mt-2">$<%= listing.price %></p>
         <p class="blockquote mt-2"><%= link_to "See more", listing_path(listing.id), class: "btn btn-info text-white" %></p>
         </div>
       </div>
