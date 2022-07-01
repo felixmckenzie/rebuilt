@@ -58,3 +58,4 @@ gem "stripe", "~> 6.4"
 gem 'cancancan'
 gem 'ransack' 
 gem 'enum_help'
+gem "aws-sdk-s3", "~> 1.114"
