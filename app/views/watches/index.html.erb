@@ -3,23 +3,10 @@
 <h1> <%= current_user.username %>'s Watchlist</h1>
 
   <div class="row row-cols-1 row-cols-md-4 g-4 mx-5">
-<% current_user.watched_listings.each do | listing | %>
-<div class="col mb-4">
-        <div class="card h-100">
-        <% if listing.picture.attached? %>
-            <%= link_to (image_tag listing.picture, class: "card-img-top"), listing %>
-        <% end %>
-        <div class="card-body">
-         <h4 class="card-title"><%= listing.title %></h4>
-         <span class="badge badge-pill badge-secondary">Category: <%= listing.category.name %></span>
-         <span class="badge badge-pill badge-secondary">Condition: <%= listing.condition.titleize %></span>
-         <span class="badge badge-pill badge-warning"><%= listing.watchers.count - 1 %> others watching this post </span>
-        <%= link_to "Remove From Watchlist", destroy_watch_path(listing.id), method: :delete, class: "badge badge-danger text-white" %></span>
-         <p class="blockquote mt-2">$<%= listing.price %></p>
-        <p class="blockquote mt-2"><%= link_to "See more", listing_path(listing.id), class: "btn btn-info text-white" %></p>
-        </div>
+    <% current_user.watched_listings.each do | listing | %>
+      <div class="col mb-4">
+       <%= render "watch", listing: listing %>
+    <% end %>
       </div>
     </div>
-     <% end %>
-</div>
-</div>
+  </div>

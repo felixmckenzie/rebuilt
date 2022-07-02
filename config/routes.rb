@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # get 'watches/create'
   # get 'watches/destroy'
 
-  resources :watches 
   resources :listings
   devise_for :users
   

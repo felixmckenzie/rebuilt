@@ -23,6 +23,8 @@ class WatchesController < ApplicationController
     redirect_to watchlist_path
   end
 
+  
+
 private 
 
 def watches_params

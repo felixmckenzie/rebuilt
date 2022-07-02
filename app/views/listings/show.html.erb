@@ -14,6 +14,7 @@
 <p class="blockquote mt-2">Price: $<%= @listing.price %></p>
 <p class="blockquote mt-2">Category: <%= @listing.category.name %></p>
 <p class="blockquote mt-2"> Listed By: <%= @listing.user.username %> </p>
+<p class="blockquote mt-2"><time>Listed <%= time_ago_in_words(@listing.created_at) %> ago</time></p>
 
 <% if can? :read, @listing %>
     <% if cannot? :manage, @listing %>
