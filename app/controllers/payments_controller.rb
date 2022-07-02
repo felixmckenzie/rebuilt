@@ -3,6 +3,7 @@ class PaymentsController < ApplicationController
 
   def success
     @listing = Listing.includes(user:[:address]).find(params[:id])
+    @address = Address.find(@listing.user_id)
   end
 
 

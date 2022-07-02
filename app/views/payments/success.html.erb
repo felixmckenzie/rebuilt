@@ -3,6 +3,6 @@
 
 <h4> Thank you for your purchase <%= current_user.username %> </h4>
 
-<p>Your <%= @listing.title  %> is available for pick up at <%= @listing.user.address %></p>
+<p>Your <%= @listing.title  %> is available for pick up at <%= @address.address_to_string %></p>
 
  <%= link_to 'Back to Home Page', root_path, class: "btn btn-secondary text-white" %>
