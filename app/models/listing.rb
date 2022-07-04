@@ -4,7 +4,7 @@ class Listing < ApplicationRecord
   has_rich_text :description
   has_one_attached :picture
   has_one :order, dependent: :destroy 
-  has_many :watches, inverse_of: :watched_listing, dependent: :destroy
+  has_many :watches, dependent: :destroy
   has_many :watchers, through: :watches
 
   # validations for listing form fields 
