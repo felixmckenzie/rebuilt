@@ -3,6 +3,7 @@ class PaymentsController < ApplicationController
 
   def success
     @listing = Listing.includes(user:[:address]).find(params[:id])
+    @listing.update(sold: :true)
     @address = Address.find(@listing.user_id)
   end
 
@@ -13,7 +14,6 @@ class PaymentsController < ApplicationController
     listing_id = payment.metadata.listing_id
     buyer_id = payment.metadata.user_id
     listing = Listing.find(listing_id)
-    listing.update(sold: :true)
     @order = Order.create(listing_id: listing_id, buyer_id: buyer_id, seller_id: listing.user_id)
 end
 

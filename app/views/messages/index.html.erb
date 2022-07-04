@@ -1,0 +1,28 @@
+
+<h1 class="h1">Message <%= @conversation.recipient.username %></h1>
+
+<% if @over_ten %>
+<%= link_to "Show Previous", "?m=all", class: "btn btn-info" %>
+<% end %>
+
+<section class="card p-2" >
+<% @messages.each do |message|  %>
+<% if message.body %>
+<%  user = User.find(message.user_id) %>
+<article>
+<div><strong><%= user.username %></strong> <%= message.message_time %></div>
+<div> <%= sanitize mark_down_to_html(message.body) %></div>
+</article>
+<% end %>
+<% end %>
+</section>
+
+<%= form_for [@conversation, @message] do |f| %>
+<div class="card m-3">
+  <%= f.text_area :body, class: "input-group-text" ,placeholder: "Inquire about a listing..." %>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+  </div>
+  <div class="text-right mx-5">
+ <%= f.submit "Send message", class:"btn btn-info" %>
+ </div>
+<% end %>

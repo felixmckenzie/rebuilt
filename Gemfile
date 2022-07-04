@@ -59,3 +59,5 @@ gem 'cancancan'
 gem 'ransack' 
 gem 'enum_help'
 gem "aws-sdk-s3", "~> 1.114"
+gem 'kramdown' 
+gem 'kramdown-parser-gfm'

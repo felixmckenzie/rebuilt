@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   resources :listings
   devise_for :users
+
+  resources :conversations do 
+    resources :messages 
+  end 
+
   
 root "listings#index" 
 get "/payments/success", to: "payments#success"
