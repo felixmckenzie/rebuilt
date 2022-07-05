@@ -38,7 +38,9 @@
      
     <%= a.input :state, 
                required: true, 
-               autofocus: true 
+               autofocus: true,
+               as: :select,
+               collection: Address.states
     %> 
 
 <% end %>

@@ -28,9 +28,11 @@
                 required: true,
                 autofocus: true
                 %>  
-    <%= address.input :state,
-                required: true,
-                autofocus: true
+    <%= address.input :state, 
+               required: true, 
+               autofocus: true,
+               as: :select,
+               collection: Address.states
                 %>     
 
                 <% end %>
