@@ -13,8 +13,7 @@
                 autofocus: true
                 %>
 <%= f.simple_fields_for :address, Address.new do |a| %>
-
-
+<%= a.error_notification %>  
 
     <%= a.input :street_number, 
                 required: true, 
@@ -23,12 +22,13 @@
 
     <%= a.input :street_name, 
                 required: true, 
-                autofocus: true 
+                autofocus: true,
+                
     %>  
 
     <%= a.input :suburb, 
                 required: true, 
-               autofocus: true 
+               autofocus: true
     %>   
 
     <%= a.input :postcode, 
@@ -40,8 +40,8 @@
                required: true, 
                autofocus: true,
                as: :select,
-               collection: Address.states
-    %> 
+               collection: Address.states.keys
+    %>
 
 <% end %>
                 

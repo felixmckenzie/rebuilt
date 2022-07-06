@@ -10,9 +10,9 @@ Extreme weather events continue to increase in frequency. The severe floods in 2
 
 The crisis has been made worse further, with a shortage of new building materials stemming from supply chain disruptions and labor shortages in the building industry from the Covid 19 pandemic. Moreover, population growth in recent years has led to a significant amount of new houses being constructed, further contributing to the supply shortage. However, increased building activity has also resulted in an increase in leftover/unused building materials, which until ReBuilt, often ended up in landfill. 
 
-## Link to deployed app
+## Link to Deployed App
 
-## Link to Github
+## Link To Github
 
 ## Description of your marketplace app (website)
 
@@ -81,8 +81,6 @@ Th target audience of this application are those building or renovating a home w
 ## Screenshots 
 
 
-
-
 ## User Stories 
 As Jim, a potential buyer. I want to be able to browse listings without signing up and filter the listings by keywords to see if the application has the type of materials I need.
 
@@ -120,9 +118,21 @@ As Jane, a buyer. I want the option to pay online using a credit card in a safe 
 ### Messages Page
 ![Messages](./images/Messages.png)
 
+## ERD Diagram
+![ERD](./images/rebuilt-ERD-final.png)
+
+## Explain The Different High-Level Components (Abstractions) In The App
+The  high level components in Rebuilt inherit from and follow the conventions of both Active Record and Action Controller, this can be seen in the following examples: 
+
+### Active Record 
+Active record provides the representation of data in the Rebuilt application as models. Each instance of an object, such as a User, Listing, Address, Category, Order, Watch Listing, or Conversation, is the encapsulation of a row in a Postgresql database. By mapping each of these rows to an object in the application, Active Record gives us access to all the domain logic needed to allow data to persist in the database and update it as necessary. The access logic that makes querying the database possible is handled through Active Record helpers methods, which are abstractions of SQL queries. For instance
+
+A user, need only have access to the conversations that they are involved in. This is achieved through two "Where" statements joined by a conditional "or" i.e. where the current user is the recipient, or, the current user is the sender of a message (see code in conversations controller). This statement retrieves an association object of all conversation threads the user is involves in. 
+
+Another example of a component using abstracted Active Record logic is 
 
 
-
+### Action Controller
 
 
 
