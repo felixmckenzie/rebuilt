@@ -11,6 +11,7 @@
                 autofocus: true
                 %>
     <%= f.simple_fields_for :addresses do |address| %>
+
     <%= address.input :street_number, 
                 required: true,
                 autofocus: true
@@ -19,7 +20,6 @@
                 required: true,
                 autofocus: true
                 %>  
-
     <%= address.input :suburb,
                 required: true,
                 autofocus: true

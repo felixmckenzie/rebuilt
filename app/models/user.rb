@@ -19,5 +19,5 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates_presence_of :username
   validates_uniqueness_of :username
-  validates_length_of :username, minimum: 5, maximum: 10
+  validates_length_of :username, minimum: 4, maximum: 20
 end

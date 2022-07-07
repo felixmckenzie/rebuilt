@@ -11,6 +11,7 @@ class Listing < ApplicationRecord
 
   # validations for listing form fields
   validates :title, :condition, :price, :description, presence: true
+  validates :price, numericality: { only_integer: true }
 
   enum condition: {
     needs_work: 0,

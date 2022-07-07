@@ -23,17 +23,20 @@
     <%= a.input :street_name, 
                 required: true, 
                 autofocus: true,
+                hint: "street names can only contain letters"
                 
     %>  
 
     <%= a.input :suburb, 
                 required: true, 
-               autofocus: true
+               autofocus: true,
+               hint: "suburbs can only contain letters"
     %>   
 
     <%= a.input :postcode, 
               required: true, 
-              autofocus: true 
+              autofocus: true, 
+              hint: "postcode must be a 4 digit number" 
     %> 
      
     <%= a.input :state, 
