@@ -2,19 +2,18 @@ class MessagesController < ApplicationController
 before_action :find_conversation
 
 def index
-    @messages = @conversation.messages 
+    @messages = @conversation.messages
     
     if @messages.length > 10
-        @over_ten = true 
+        @over_ten = true
         @messages = @messages[-10..-1]
-    end 
-
-    if params[:m]
+      end
+  
+      if params[:m]
         @over_ten = false
-        @messages = conversations.messages 
-    end 
+        @messages = @conversation.messages
+      end
     @message = @conversation.messages.new 
- 
 end 
 
 def new 

@@ -1,3 +1,4 @@
-module ListingsHelper
+# frozen_string_literal: true
 
+module ListingsHelper
 end

@@ -5,7 +5,7 @@
 <%= link_to "Show Previous", "?m=all", class: "btn btn-info" %>
 <% end %>
 
-<div class="well" id="chatbox" style="height: 250px; border: solid 1px #222222; overflow-y; scroll" >
+<div class="well" id="chatbox" style="height: 250px; border: solid 1px #222222; overflow-y: scroll" >
 <% @messages.each do |message|  %>
 <% if message.body %>
 <%  user = User.find(message.user_id) %>
