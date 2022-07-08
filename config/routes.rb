@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :conversations do
-    resources :messages
+    resources :messages, only: %i[index create new]
   end
+
+  put '/messages/:id', to: 'messages#update', as: 'mark_as_read'
 
   root 'listings#index'
   get '/payments/success', to: 'payments#success'

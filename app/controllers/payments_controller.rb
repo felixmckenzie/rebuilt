@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[webhook success]
 
   def success
-    @listing = Listing.includes(user:[:address]).find(params[:id])
+    @listing = Listing.includes(user: [:address]).find(params[:id])
     @listing.update(sold: true)
     @address = Address.find(@listing.user_id)
   end

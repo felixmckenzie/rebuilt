@@ -1,19 +1,25 @@
 
 <h1 class="h1">Message <%= @conversation.recipient.username %></h1>
 
-<% if @over_ten %>
-<%= link_to "Show Previous", "?m=all", class: "btn btn-info" %>
-<% end %>
 
 <div class="well" id="chatbox" style="height: 250px; border: solid 1px #222222; overflow-y: scroll" >
 <% @messages.each do |message|  %>
 <% if message.body %>
-<%  user = User.find(message.user_id) %>
-<article>
-<div><strong><%= user.username %></strong> <%= message.message_time %></div>
-<div> <%= sanitize mark_down_to_html(message.body) %></div>
-</article>
+<%  user = find_message_sender(message)%>
+<article class="ml-3">
+<div>
+<strong><%= user.username %></strong> <%= message.message_time %>...
+<% if message.read == false && message.user_id != current_user.id %>
+<span><%= link_to "mark as read", mark_as_read_path(message), method: :put %></span>
+<% elsif message.read == true %>
+<span> read <%= time_ago_in_words(message.updated_at)%> ago</span>
 <% end %>
+</div>
+<div> 
+<%= sanitize mark_down_to_html(message.body) %>
+</div>
+</article>
+  <% end %>
 <% end %>
 </div>
 
@@ -26,3 +32,4 @@
  <%= f.submit "Send message", class:"btn btn-info" %>
  </div>
 <% end %> 
+

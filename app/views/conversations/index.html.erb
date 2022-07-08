@@ -6,9 +6,7 @@
 <p class="blockquote mt-2"><%= link_to "#{user.username}", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %></p>
 <% end %>
 </div>
-
-
-<div class="col-3">
+<div class="col-6">
     <h3>Conversations</h3>
         <% @conversations.each do |conversation|%>
             <% recipient = set_recipient(conversation, current_user, recipient) %>
@@ -16,6 +14,7 @@
                 <% unless current_user.id == recipient %>
                 <div class="card-body">
                 <p class="blockquote mt-2"><%= link_to "#{recipient.username}", conversation_messages_path(conversation) %></p>
+                <span class="badge badge-warning"><%= conversation.messages.where(read: false, user_id: recipient.id).length %> unread messages</span>
                 </div>
                 </div>
                 <% end %>
