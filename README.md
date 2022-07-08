@@ -10,9 +10,11 @@ Extreme weather events continue to increase in frequency. The severe floods in 2
 
 The crisis has been made worse further, with a shortage of new building materials stemming from supply chain disruptions and labor shortages in the building industry from the Covid 19 pandemic. Moreover, population growth in recent years has led to a significant amount of new houses being constructed, further contributing to the supply shortage. However, increased building activity has also resulted in an increase in leftover/unused building materials, which until ReBuilt, often ended up in landfill. 
 
-## Link to Deployed App
+## Link to Heroku Deployed App
+https://rebuilt-official.herokuapp.com/
 
 ## Link To Github
+https://github.com/felixmckenzie/rebuilt
 
 ## Description of your marketplace app (website)
 
@@ -47,24 +49,23 @@ Stripe integration provides a safe and secure way to checkout and pay online wit
 
 #### Core Technologies Used in Development
 - HTML
-- Bootstrap 4.5 (CSS)
 - Ruby 2.7
 - Ruby On Rails 6.1.6
 - PostgresQL
 - Git 
--Github
+- Github
 
 #### Gems Added To Project 
-- Devise
-- Bootstrap
-- Jquery
-- Simple Form
-- Stripe 
-- Can Can Can 
-- Kramdown 
-- Ransack
-- Enum Help 
-- AWS-S3
+- Devise: User authentication
+- Bootstrap: Styling
+- Jquery: Boostrap dependency
+- Simple Form: Form helper 
+- Stripe: Payment gateway
+- Can Can Can: User authorization
+- Kramdown: Markdown to HTML converter
+- Ransack: Search bar helper
+- Enum Help: Form enum helper
+- AWS-S3: Amazon S3 for static file storage in the cloud
 
 #### Deployment
 - Heroku 
