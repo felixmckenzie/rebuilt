@@ -1,11 +1,15 @@
 
-<h1 class="h1">Message <%= @conversation.recipient.username %></h1>
 
+<% if current_user.id == @conversation.sender_id %>
+<h1 class="h1">Message <%= @conversation.recipient.username %></h1>
+<% else %>
+<h1 class="h1">Message <%= @conversation.sender.username %></h1>
+<% end %>
 
 <div class="well" id="chatbox" style="height: 250px; border: solid 1px #222222; overflow-y: scroll" >
 <% @messages.each do |message|  %>
 <% if message.body %>
-<%  user = find_message_sender(message)%>
+<%  user = set_user_to_message_sender(message)%>
 <article class="ml-3">
 <div>
 <strong><%= user.username %></strong> <%= message.message_time %>...

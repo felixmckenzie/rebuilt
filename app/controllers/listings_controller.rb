@@ -8,7 +8,7 @@ class ListingsController < ApplicationController
 
   # GET /listings or /listings.json
   def index
-    # Finds all listings with keyword and category provided by user 
+    # Finds all listings with keyword and category provided by use. Eager or preloads category  
     @q = Listing.includes(:category).ransack(params[:q])
     @listings = @q.result
   end
@@ -96,6 +96,7 @@ class ListingsController < ApplicationController
   end
 
   def set_form_vars
+    # Retrieves all categories for create listing form
     @categories = Category.all
     @conditions = Listing.conditions.keys
   end

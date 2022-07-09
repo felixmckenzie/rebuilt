@@ -5,12 +5,12 @@ class ConversationsController < ApplicationController
 
   def index
     @users = User.all
-    # eager loads messages, and retrieves all conversations where the current user is the sender or the current is the recipient
+    # eager or pre loads messages, and retrieves all conversations where the current user is the sender or the current user is the recipient
     @conversations = Conversation.includes(:messages).where(sender_id: current_user.id).or(Conversation.where(recipient_id: current_user.id))
   end
 
   def create
-      # If conversastion exists between a sender and recipient, create action will find the first instance, else it will create a new conversation
+      # If conversation exists between a sender and recipient, create action will find the first instance, else it will create a new conversation
     @conversation = if Conversation.between(params[:sender_id], params[:recipient_id]).present?
                       Conversation.between(params[:sender_id], params[:recipient_id]).first
                     else
@@ -19,7 +19,10 @@ class ConversationsController < ApplicationController
     redirect_to conversation_messages_path(@conversation)
   end
 
-  def destroy; end
+  def destroy
+    @conversation = Conversation.find(params[:id])
+    @conversation.destroy
+  end
 
   private
 

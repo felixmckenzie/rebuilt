@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 class WatchesController < ApplicationController
   before_action :authenticate_user!
@@ -18,6 +17,7 @@ class WatchesController < ApplicationController
   end
 
   def destroy
+    # Deletes the watch list item by the listing_id from the destroy_watch_path route 
     Watch.destroy_by(listing_id: params[:id])
     flash[:alert] = 'listing removed from watchlist'
     redirect_to watchlist_path

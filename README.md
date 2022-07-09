@@ -85,17 +85,17 @@ Rebuilt uses Stripe as a third party payment processing platform. Stripe Checkou
 
 
 ## User Stories 
-As Jim, a potential buyer. I want to be able to browse listings without signing up and filter the listings by keywords to see if the application has the type of materials I need.
+As Jim, a potential buyer. I want to be able to browse listings without signing up. I want to be able to filter the listings by keywords to see if the application has the type of materials I need.
 
 As Susan, I’ve browsed the application and decided I want to make a purchase. I want to easily sign up to the application and keep my user credentials secure. 
 
-As Tim, a plasterer, I often have leftover gyprock sheets after a build. I want an online application where I can post a listing and let potential buyers know how much I have, the price and the condition. 
+As Tim, a plasterer, I often have leftover gyprock sheets after a build. I want an online application where I can post a listing and let potential buyers know the quantity, price and the condition. 
 
 As Mary, a recent renovator, I have lots of leftover tiles from my renovation. I want to upload photos to the application, so potential buyers can see if the tiles would suit their home. 
 
-As John, a new home owner, we have lots of excess paint from building our house. I want to list the items, but also, edit the price if it doesn’t sell quickly enough. 
+As John, a new home owner, we have lots of excess paint from building our house. I want to list the items, but also, edit the price if it's not selling. 
 
-As Emma, a homeowner whose kitchen was recently destroyed by flooding, I need kitchen cabinets of a particular size to fit the space. Before I commit to purchasing cabinets from the application I’d like to be able to message the seller in the application to see if the dimensions are correct. 
+As Emma, a homeowner whose kitchen was recently destroyed by flooding, I need kitchen cabinets of a particular size to fit the space. Before I commit to purchasing cabinets from the application I’d like to be able to message the seller to see if the dimensions are correct. 
 
 As Tom, a recent seller, I want to delete all the items from the application that I have sold so others don't inquire. 
 

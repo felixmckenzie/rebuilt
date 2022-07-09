@@ -12,12 +12,12 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params)
-    redirect_to conversation_messages_path(@conversation) 
     @message.save
+    redirect_to conversation_messages_path(@conversation) 
   end
 
   def update
-    # Finds message from id . The parameter is passed from mark_as_read_path on the message index page 
+    # Finds message from message id. The param is passed from mark_as_read_path route on the message index page 
     @message = Message.find(params[:id])
     @message.update!(read: true)
     redirect_to conversation_messages_path(@message.conversation_id)

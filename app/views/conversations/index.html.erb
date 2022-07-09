@@ -16,6 +16,8 @@
                 <div class="card-body">
                 <p class="blockquote mt-2"><%= link_to "#{recipient.username}", conversation_messages_path(conversation) %></p>
                 <span class="badge badge-warning"><%= conversation.messages.where(read: false, user_id: recipient.id).length %> unread messages</span>
+                <span> <%= link_to "Send Message", conversation_messages_path(conversation), class:"btn btn-info float-right text-white" %></span>
+                <%=link_to "Delete", conversation, method: :delete, data: {confirm: "Are you sure you want to delete this conversation?"} , class: "btn btn-danger text-white float-right mr-1" %>
                 </div>
                 </div>
                 <% end %>
