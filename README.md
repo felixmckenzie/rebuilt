@@ -83,6 +83,23 @@ Rebuilt uses Stripe as a third party payment processing platform. Stripe Checkou
 
 ## Screenshots 
 
+### Index Page 
+![Index-top](./images/index-top.png)
+![Index-page](./images/index-page.png)
+### Create Listing Form
+![create-listing](./images/create-listing.png)
+### Authorised to Buy or Manage Listing
+![authorised-to-buy](./images/authorised-to-buy.png)
+![authorised-to-manage](./images/authorised-to-manage.png)
+### Watchlist
+![watchlist](./images/watchlist.png)
+### Conversations and Messages
+![conversations](./images/conversations-page.png)
+![messages](./images/message-page.png)
+### Stripe Checkout
+![checkout](./images/stripe-checkout.png)
+### Order Success
+![success](./images/order-success-page.png)
 
 ## User Stories 
 As Jim, a potential buyer. I want to be able to browse listings without signing up. I want to be able to filter the listings by keywords to see if the application has the type of materials I need.
@@ -140,11 +157,11 @@ When a User signs up to Rebuilt, they fill in a form, on clicking submit, the us
 
 Apart from CRUD operations Active Record gives us the ability to retrieve singular or collections of records that meet a critera through the query interface. The models that are returned from these queries, can then be manipulated with business logic to be rendered in view. In the application we see these abstractions in various components such as:
 
-A user, need only have access to the conversations that they are involved in. This is achieved through two "Where" statements joined by a conditional "or" i.e. where the current user is the recipient, or, the current user is the sender of a message (see code in conversations controller). This statement retrieves an association collection of all conversation threads the user is involves in, they can then communicate with another user to find further details about listing. 
+A user, need only have access to the conversations that they are involved in. This is achieved through two "Where" statements joined by a conditional "or" i.e. where the current user is the recipient, or, the current user is the sender of a message (see code in conversations controller). This statement retrieves an association collection of all conversations the user is involves in, they can then communicate with another user to find further details about listing. 
 
 Another component that takes advantage of Active Record is the search bar. When a user navigates to the Index (home) page they have the ability to search for listings by a keyword contained in the title and by category. Listings belongs to a category, that is to say, listing has a category foreign key field in the database which creates an association between the two records. If a user searches in a category such as "doors" and then uses the keyword "blue", a query is triggered on the Listings table to find all blue doors in the database. By using the includes statement, we are able to use the power of Active Record to find the category attribute without using an additional query, underneath this mapping layer an SQL query is fired to preload all the blue doors (if any). This ultimately results in a faster loaded screen for the end user. 
 
-While the Home Index and Messages page retrieve a set of records, it is also necessary to retrieve a single record. The Watchlist component of Rebuilt is represented by a collection of joined tables in the database i.e. a User has many Watched_listings and a Listing has many Watchers through the Watches table. When A user wants to remove a Listing they are watching from their personal watch list, we leverage a destroy_by query on the Watches table, here destroy_by finds the listing id passed through the parameters and destroys the assocation on the Watches table. Another simple example of a single query is when a User decides to navigate to the show page of listing to display more actions they can take such as read the description, purchase, manage (if authorised) or message the seller. This is achieved through a simple find query where the id of the listings is passed through the params to find the corresponding record in the database. 
+While the Home Index and Messages page retrieve a set of records, it is also necessary to retrieve a single record. The Watchlist component of Rebuilt is represented by a collection of joined tables in the database i.e. a User has many Watched_listings and a Listing has many Watchers through the Watches table. When A user wants to remove a Listing they are watching from their personal watch list, we leverage a destroy_by query on the Watches table, destroy_by finds the listing id passed through the parameters and destroys the association on the Watches table. Another simple example of a single query is when a User decides to navigate to the show page of listing to display more actions they can take such as read the description, purchase, manage (if authorised) or message the seller. This is achieved through a simple find query where the id of the listings is passed through the params to find the corresponding record in the database. 
 
 ### Application Controller
 All controllers in Rebuilt inherit from Application controller. Application Controller allows the application to handle any requests made by our end users by leveraging RESTful resource actions. Application Controller determines which controller needs to handle the user request in order to retrieve or write the appropriate data to and from the correct models. Application is the C in MVC architecture. Requests from our users come via two types of parameters, query string parameters for get requests or post data parameters via a HTML form, to read and write to the database respectively. For instance:
@@ -162,7 +179,7 @@ Application Controller also gives use the ability to manage the user's session, 
 The User Model in Rebuilt has the following relationships
  - A User has many Listings. Allowing them to create, destroy and manage as many listngs as they would like in the database. 
  - A User has one Address. A User can only have one address in reference a pick up location, however they can edit that address as necessary. 
- - A User has many sold orders, that is to say once a buyer (another user) chooses to purchase a listing from a seller, an order is created with the sellers id as a foreign key for reference. Any one user can have many sold orders depending on the number of listings they have sold via an order. 
+ - A User has many sold orders, that is to say once a buyer (another user) chooses to purchase a listing from a seller, an order is created with the sellers id as a foreign key. Any one user can have many sold orders depending on the number of listings they have sold via an order. 
 - A User has many bought orders, inversely any user can choose to purchase as many listings as they would like, and thus a buyers id is created for them on the Orders table. 
 - A User has many Watched_Listings through Watches, this describes the relationship where a User has decided to save a Listing to their watch list. They can save zero or many Listings to their Watchlist at any time and we can access these Listings via user.watched_listings . 
 
@@ -172,13 +189,14 @@ The User Model in Rebuilt has the following relationships
 - A Listing has Rich Text Area. This relationship with an Action text, allows a user to use a trix editor when creating their listings. They can then adjust their font and styling on a listing description as they see fit.
 - A Listing has one attached picture, This relationship with active storage allows a user to upload a photo of their listings which is stored as a blob. 
 - A Listing has one Order, Since each Listing on Rebuilt is unique i.e. is not part of an inventory of multiple same items, a User may only purchase a Single listing in an Order and once a Listing is part of an Order, it cannot have another Order with another User. thus a Listing can only have one and only one Order. 
-- A Listing has many Watchers through Watches, this relationship describes how many Users have saved a Listing to their Watchlist and thus are a "Watcher" of that post. This allows us to use logic such as Listings.watchers to see all the users watching a Listing. 
+- A Listing has many Watchers through Watches, this relationship describes how many Users have saved a Listing to their Watchlist and thus are a "Watcher" of that listing. This allows us to use logic such as Listings.watchers to see all the users watching a Listing. 
 
 ### Address Model 
 - An Address belongs to User, each Address belongs to a User. 
 
 ### Category Model 
 - Category has many Listings, each category in Rebuilt can have many Listings belonging it.
+
 ### Conversation Model
 - A Conversation belongs to a Sender, A Conversation has a foreign key of "sender_id" which references a specific user from the Users table i.e the user who sent the message in a Conversation thread. 
 - A Conversation belongs to a Recipient, A Conversation has a foreign key of "recipient_id" which references the user who receives a message in a Conversation thread. 
@@ -202,13 +220,13 @@ The User Model in Rebuilt has the following relationships
 In reference to the ERD the relations and their attributes implemented within the Rebuilt Postgresql Database are: 
 
 ### Users 
-The Users relation stores essential information pertaining to each user of Rebuilt, in order for them to identify themselves in the application and pass on any integral information for payments, communication and management of their listings. The data attributes stored are:
+The Users relation stores essential information pertaining to each user of Rebuilt, in order for them to identify themselves in the application and pass on any integral information for payments, communication and management of their listings. The data attributes on the users table are:
 - Email as a string type type
 - Password as an encrypted string type
 - Username as a string type 
 
 ### Addresses
-The Addresses relation stores information regarding a pickup (or drop off) address for each user. This allows the sale of listings between users to finish with a location for the exchange of materials. The data attributes stored are: 
+The Addresses relation stores information regarding a pickup (or drop off) address for each user. Therefore a user has one address. This allows the sale of listings between users to finish with a location for the exchange of materials. The data attributes stored are: 
 - street_number as a string type
 - street_name as a string type
 - suburb as a string type
@@ -218,7 +236,7 @@ The Addresses relation stores information regarding a pickup (or drop off) addre
 - foreign key of user_id
 
 ### Listings
-The Listings relation stores crucial information regarding the Listing, in order for potential buyers to understand What is they are buying, if it is currently available for sale, a detailed description of the listing, it's condition, the price, and an associated category for easy retrieval and grouping. The data attributes are:
+The Listings relation stores crucial information regarding the Listing, in order for potential buyers to understand What is they are buying, if it is currently available for sale, a detailed description of the listing, it's condition, the price, and an associated category for easy retrieval and grouping. Listings also have a foreign key of user id, to identify the seller of the listing, and a category id to identify the category it belongs to. The data attributes are:
 - title as a string type
 - description as a rich text type
 - condition as an integer type
@@ -227,33 +245,33 @@ The Listings relation stores crucial information regarding the Listing, in order
 - foreign key of user_id
 
 ### Categories
-The purpose of the Categories relation is to  simply store a name of a category to associate a Listings record to. The attribute is:
+The purpose of the Categories relation is to simply store a name of a category to associate a Listings record to. The attribute is:
 - name as a string type 
 
 ### Orders
-The Orders relation creates order records attributes of a buyer id, seller id and listing id, and thus is a relationship table made up of foreign keys. The attribute are:
+The Orders relation creates order records attributes of a buyer id, seller id and listing id, and thus is a joining table made up of foreign keys. In reference to the ERD, a user can have zero or many orders and a listing can have zero or one orders. The attributes of the Orders table are:
 - a listing_id which references the Listings relation
 - a buyer_id which references the Users relation
 - a seller_id which references the Users relation
 
 ### Conversations 
-The Conversations relation serves as a relationship table between the communications of a sender and a recipient of messages, and thus is made of user foreign keys. The attributes in the database are:
-- sender_id
-- recipient_id 
+The Conversations relation serves as a join table between the communications of a sender and a recipient of messages, and thus is made of user foreign keys. The attributes in the database are:
+- sender_id (foreign key on Users relation)
+- recipient_id  (foreign key on Users relation)
 
 ### Messages 
-The Messages relation stores the data that is sent in a conversation, it therefore needs to reference the conversation it relates to as well as the user who sent the message, as well as the content of the message. The attributes are:
+The Messages relation stores the data that is sent in a conversation, it therefore needs to reference the conversation it relates to as well as the user who sent the message, as well as the content of the message. A conversation has one or many messages (a conversation to exist there must be the exchange of atleast one message), while any user can have zero or many messages.The attributes are:
 - body as a text type
 - conversation_id as a foreign key
 - user_id as a foreign key 
 
 ### Watches 
-The Watches relation is a relationship table that enables Users to save listings their and also relates a listing being watched to a user. The attributes are 
+The Watches relation is a join table that enables Users to save listings their and also relates a listing being watched to a user. both a user and a listing can have zero or many watches, depending on how many listings a user has saved to their watchlist, and how many watchers a listing may have. The attributes are: 
 - listing_id as a foreign key reference
 - user_id as a foreign key reference 
 
 ### Action Text Rich Text Areas 
-The Action Text Rich Text Areas relation is assosciated with the Listings relation, and stores the Listing description as a rich text field. The attributes are 
+The Action Text Rich Text Areas relation is assosciated with the Listings relation, and stores the Listing description as a rich text field. The attributes are:
 - name as a string type 
 - body as a text type
 - record type as a string
