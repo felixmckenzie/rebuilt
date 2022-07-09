@@ -9,8 +9,8 @@ class ConversationsController < ApplicationController
     @conversations = Conversation.includes(:messages).where(sender_id: current_user.id).or(Conversation.where(recipient_id: current_user.id))
   end
 
-  # If conversastion exists between a sender and recipient, create action will find the first instance, else it will create a new conversation
   def create
+      # If conversastion exists between a sender and recipient, create action will find the first instance, else it will create a new conversation
     @conversation = if Conversation.between(params[:sender_id], params[:recipient_id]).present?
                       Conversation.between(params[:sender_id], params[:recipient_id]).first
                     else

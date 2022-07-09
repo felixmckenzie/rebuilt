@@ -4,8 +4,7 @@ class WatchesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @user = current_user
-    # @all_watched_listings_for_user = Watch.where(watcher_id: @user.id)
+    
   end
 
   def create

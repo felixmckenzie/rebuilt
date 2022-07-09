@@ -70,14 +70,16 @@ Stripe integration provides a safe and secure way to checkout and pay online wit
 #### Deployment
 - Heroku 
 
-#### Third Party Services 
-- Amazon Web Services 
-- Stripe 
-
-
 #### Target Audience
 Th target audience of this application are those building or renovating a home with a focus on those who have been affected by extreme weather events. Rebuilt is also targeted at those working in the building industry and those who have recently built a home to encourage them to on sell their unwanted building materials 
 
+## Third Party Services 
+
+#### Amazon Web Services 
+Rebuilt uses Amazon S3 buckets as cloud storage for image files uploaded to the site. This service allows the site to store and retrieve user images as required. 
+
+#### Stripe 
+Rebuilt uses Stripe as a third party payment processing platform. Stripe Checkout is PCI compliant and is a hosted payments integration that creates a short-lived pre-built payment page, before redirecting to a successful payment page after processing. 
 
 ## Screenshots 
 
@@ -103,21 +105,27 @@ As Jane, a buyer. I want the option to pay online using a credit card in a safe 
 
 ## Wireframes 
 
-### Homepage
+#### Homepage
 ![Home-Page](./images/Home-Page.png)
 ![Home-Page-Tablet](./images/Home-Page-Tablet.png)
 ![Home-Page-Mobile](./images/Home-Page-Mobile.png)
-### Show Listing Page
+#### Show Listing Page
 ![Show-Page](./images/Show-Listing-Page.png)
 ![Show-Page-Tablet](./images/Show-Listing-Tablet.png)
 ![Show-Page-Mobile](./images/Show-Listing-Mobile.png)
-### Sign Up Form
+#### Sign Up Form
 ![Sign-Up-Form](./images/Sign-Up-Form.png)
-### User Watchlist
+#### User Watchlist
 ![Watchlist](./images/User-Watchlist.png)
 ![Watchlist-Tablet](./images/Watchlist-tablet.png)
-### Messages Page
+#### Message User Page
 ![Messages](./images/Messages.png)
+#### All Conversations Page
+![Conversations](./images/Conversations%20Page.png)
+#### Stripe Checkout
+![Stripe](./images/Stripe%20Checkout.png)
+#### Payment Success Page
+![Success](./images/Payment%20Success%20Page.png)
 
 ## ERD Diagram
 ![ERD](./images/rebuilt-ERD-final.png)
@@ -128,15 +136,15 @@ The high level components in Rebuilt inherit from and follow the conventions of 
 ### Active Record 
 Active record provides the representation of data in the application as models, and is the "M" in MVC Architecture. Each instance of an object, such as a User, Listing, Address, Category, Order, Watch Listing, Conversation, or Message maps to a row in a Postgresql database. By mapping each of these rows to an object in the application, Active Record gives us access to all the domain logic needed to allow data to persist and update it as necessary. The domain logic that makes reading and writing to the database possible is all handled through the Active Record ORM pattern, which are abstractions of SQL queries. For instance:
 
-When a User signs up to Rebuilt, they fill in a form, on clicking submit, the user details (fields) are passed through HTTP parameters to newly initialised User and Address models. Models are mapped to the database by New, Create, and Save methods. Furthermore, if a User wanted to update or delete their account, update and destroy methods would trigger the corresponding record to be updated or deleted. Therefore Active Record gives us full CRUD capabilties on the tables created in the database. 
+When a User signs up to Rebuilt, they fill in a form, on clicking submit, the user details (fields) are passed through HTTP parameters to newly initialised User and Address models. Models are mapped to the database by Create, and Save methods. Furthermore, if a User wanted to update or delete their account, update and destroy methods would trigger the corresponding record to be updated or deleted. Therefore Active Record gives us full CRUD capabilties on the tables created in the database. 
 
-Apart from CRUD operations Active Record gives us the ability to retrieve singular or collections of records that meet a critera through the Active Record query interface. The models that are returned from these queries, can then be manipulated with business logic to be rendered in view. In the application we see these abstractions in various components such as:
+Apart from CRUD operations Active Record gives us the ability to retrieve singular or collections of records that meet a critera through the query interface. The models that are returned from these queries, can then be manipulated with business logic to be rendered in view. In the application we see these abstractions in various components such as:
 
 A user, need only have access to the conversations that they are involved in. This is achieved through two "Where" statements joined by a conditional "or" i.e. where the current user is the recipient, or, the current user is the sender of a message (see code in conversations controller). This statement retrieves an association collection of all conversation threads the user is involves in, they can then communicate with another user to find further details about listing. 
 
 Another component that takes advantage of Active Record is the search bar. When a user navigates to the Index (home) page they have the ability to search for listings by a keyword contained in the title and by category. Listings belongs to a category, that is to say, listing has a category foreign key field in the database which creates an association between the two records. If a user searches in a category such as "doors" and then uses the keyword "blue", a query is triggered on the Listings table to find all blue doors in the database. By using the includes statement, we are able to use the power of Active Record to find the category attribute without using an additional query, underneath this mapping layer an SQL query is fired to preload all the blue doors (if any). This ultimately results in a faster loaded screen for the end user. 
 
-While the Home Index and Messages page retrieve a set of records, it is also necessary to retrieve a single record. The Watchlist component of Rebuilt is represented by a join table in the database i.e. a User has many Watched_listings and a Listing has many Watchers through the Watches table. When A user wants to remove a Listing they are watching from their personal watch list, we leverage a destroy_by query on the Watches table, here destroy_by finds the listing id passed through the parameters and destroys the assocation on the Watches table. Another simple example of a single query abstraction is when a User decides to navigate to the show page of listing to display more actions they can take i.e read the description, purchase, manage (if authorised) or message the seller. This is achieved  through a simple find query where the id of the listings is passed through the params to find the corresponding record in the database. 
+While the Home Index and Messages page retrieve a set of records, it is also necessary to retrieve a single record. The Watchlist component of Rebuilt is represented by a collection of joined tables in the database i.e. a User has many Watched_listings and a Listing has many Watchers through the Watches table. When A user wants to remove a Listing they are watching from their personal watch list, we leverage a destroy_by query on the Watches table, here destroy_by finds the listing id passed through the parameters and destroys the assocation on the Watches table. Another simple example of a single query is when a User decides to navigate to the show page of listing to display more actions they can take such as read the description, purchase, manage (if authorised) or message the seller. This is achieved through a simple find query where the id of the listings is passed through the params to find the corresponding record in the database. 
 
 ### Application Controller
 All controllers in Rebuilt inherit from Application controller. Application Controller allows the application to handle any requests made by our end users by leveraging RESTful resource actions. Application Controller determines which controller needs to handle the user request in order to retrieve or write the appropriate data to and from the correct models. Application is the C in MVC architecture. Requests from our users come via two types of parameters, query string parameters for get requests or post data parameters via a HTML form, to read and write to the database respectively. For instance:

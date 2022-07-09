@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :bought_orders, foreign_key: 'buyer_id', class_name: 'Order'
   has_many :watches, inverse_of: 'watcher', dependent: :destroy
   has_many :watched_listings, through: :watches
+  has_many :messages
   accepts_nested_attributes_for :address
 
   # Validations for additional username field and associated address model
