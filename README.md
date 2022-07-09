@@ -88,8 +88,9 @@ Rebuilt uses Stripe as a third party payment processing platform. Stripe Checkou
 ![Index-page](./images/index-page.png)
 ### Create Listing Form
 ![create-listing](./images/create-listing.png)
-### Authorised to Buy or Manage Listing
+### Authorised to Buy Listing 
 ![authorised-to-buy](./images/authorised-to-buy.png)
+### Authorised to Manage Listing
 ![authorised-to-manage](./images/authorised-to-manage.png)
 ### Watchlist
 ![watchlist](./images/watchlist.png)
